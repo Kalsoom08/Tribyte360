@@ -1,0 +1,90 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2022",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@tribyte/common": [
+        "libs/common/src"
+      ],
+      "@tribyte/common/*": [
+        "libs/common/src/*"
+      ],
+      "@tribyte/config": [
+        "libs/config/src"
+      ],
+      "@tribyte/config/*": [
+        "libs/config/src/*"
+      ],
+      "@tribyte/logger": [
+        "libs/logger/src"
+      ],
+      "@tribyte/logger/*": [
+        "libs/logger/src/*"
+      ],
+      "@tribyte/database": [
+        "libs/database/src"
+      ],
+      "@tribyte/database/*": [
+        "libs/database/src/*"
+      ],
+      "@tribyte/rabbitmq": [
+        "libs/rabbitmq/src"
+      ],
+      "@tribyte/rabbitmq/*": [
+        "libs/rabbitmq/src/*"
+      ],
+      "@tribyte/i18n": [
+        "libs/i18n/src"
+      ],
+      "@tribyte/i18n/*": [
+        "libs/i18n/src/*"
+      ],
+      "@tribyte/auth": [
+        "libs/auth/src"
+      ],
+      "@tribyte/auth/*": [
+        "libs/auth/src/*"
+      ],
+      "@tribyte/validation": [
+        "libs/validation/src"
+      ],
+      "@tribyte/validation/*": [
+        "libs/validation/src/*"
+      ],
+      "@tribyte/exceptions": [
+        "libs/exceptions/src"
+      ],
+      "@tribyte/exceptions/*": [
+        "libs/exceptions/src/*"
+      ],
+      "@tribyte/types": [
+        "libs/types/src"
+      ],
+      "@tribyte/types/*": [
+        "libs/types/src/*"
+      ],
+      "@tribyte/utils": [
+        "libs/utils/src"
+      ],
+      "@tribyte/utils/*": [
+        "libs/utils/src/*"
+      ]
+    }
+  }
+}

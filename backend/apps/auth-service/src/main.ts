@@ -7,16 +7,28 @@ async function bootstrap() {
   const logger = new AppLoggerService();
   logger.setServiceName('auth-service');
 
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+  const app = await NestFactory.create(AppModule);
+
+  app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: {
-      urls: [process.env.RABBITMQ_URI || 'amqp://guest:guest@localhost:5672'],
+      urls: [process.env.RABBITMQ_URI || 'amqp://guest:guest@127.0.0.1:5672'],
       queue: QueueNames.AUTH_QUEUE,
       queueOptions: { durable: true },
     },
   });
 
-  await app.listen();
-  logger.log('Auth Microservice is listening on RabbitMQ queue: ' + QueueNames.AUTH_QUEUE, 'Bootstrap');
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.RMQ,
+    options: {
+      urls: [process.env.RABBITMQ_URI || 'amqp://guest:guest@127.0.0.1:5672'],
+      queue: QueueNames.TENANT_QUEUE,
+      queueOptions: { durable: true },
+    },
+  });
+
+  await app.startAllMicroservices();
+  await app.listen(3001);
+  logger.log('Auth & Platform Service listening on RabbitMQ Queues: auth_queue, tenant_queue', 'Bootstrap');
 }
 bootstrap();

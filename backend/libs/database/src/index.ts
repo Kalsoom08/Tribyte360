@@ -1,6 +1,8 @@
 import { Injectable, OnApplicationShutdown } from '@nestjs/common';
 import mongoose, { Connection, Model, Schema } from 'mongoose';
 
+export * from './schemas';
+
 @Injectable()
 export class ConnectionManagerService implements OnApplicationShutdown {
   private tenantConnections: Map<string, Connection> = new Map();
@@ -8,7 +10,7 @@ export class ConnectionManagerService implements OnApplicationShutdown {
 
   async getSuperDatabaseConnection(uri?: string): Promise<Connection> {
     if (!this.superConnection) {
-      const dbUri = uri || process.env.SUPER_DB_URI || 'mongodb://localhost:27017/super_db';
+      const dbUri = uri || process.env.SUPER_DB_URI || 'mongodb://127.0.0.1:27017/super_db';
       this.superConnection = await mongoose.createConnection(dbUri).asPromise();
       console.log('Connected to Super Database:', dbUri);
     }
@@ -20,7 +22,7 @@ export class ConnectionManagerService implements OnApplicationShutdown {
       return this.tenantConnections.get(tenantSlug)!;
     }
 
-    const baseUrl = baseMongoUri || process.env.BASE_MONGO_URI || 'mongodb://localhost:27017';
+    const baseUrl = baseMongoUri || process.env.BASE_MONGO_URI || 'mongodb://127.0.0.1:27017';
     const tenantDbName = `tenant_${tenantSlug.toLowerCase()}`;
     const fullUri = `${baseUrl}/${tenantDbName}`;
 

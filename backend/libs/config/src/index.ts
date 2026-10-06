@@ -14,8 +14,8 @@ export interface AppConfig {
 export const appConfigFactory = (): AppConfig => ({
   nodeEnv: process.env.NODE_ENV || 'development',
   port: parseInt(process.env.PORT || '3000', 10),
-  superDbUri: process.env.SUPER_DB_URI || 'mongodb://localhost:27017/super_db',
-  rabbitmqUri: process.env.RABBITMQ_URI || 'amqp://guest:guest@localhost:5672',
+  superDbUri: process.env.SUPER_DB_URI || 'mongodb://127.0.0.1:27017/super_db',
+  rabbitmqUri: process.env.RABBITMQ_URI || 'amqp://guest:guest@127.0.0.1:5672',
   jwtSecret: process.env.JWT_SECRET || 'dev_secret_key',
   logLevel: process.env.LOG_LEVEL || 'debug',
   defaultLanguage: process.env.DEFAULT_LANGUAGE || 'en',

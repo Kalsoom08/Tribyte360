@@ -48,6 +48,10 @@ export const ReqContext = createParamDecorator(
 export const PERMISSIONS_KEY = 'permissions';
 export const RequirePermissions = (...permissions: string[]) => SetMetadata(PERMISSIONS_KEY, permissions);
 
+// Module Entitlement Decorator
+export const MODULE_KEY = 'required_module';
+export const RequireModule = (moduleCode: string) => SetMetadata(MODULE_KEY, moduleCode);
+
 export const CurrentUser = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();

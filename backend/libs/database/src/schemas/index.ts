@@ -2,3 +2,8 @@ export * from './super-permission.schema';
 export * from './super-role.schema';
 export * from './super-user.schema';
 export * from './tenant.schema';
+export * from './module-catalog.schema';
+export * from './subscription-plan.schema';
+export * from './activity-log.schema';
+export * from './error-log.schema';
+export * from './app-settings.schema';

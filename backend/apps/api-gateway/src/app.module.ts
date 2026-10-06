@@ -6,6 +6,10 @@ import { AppConfigModule, TenantContextGuard, AppLoggerService, QueueNames } fro
 import { HealthController } from './health.controller';
 import { AuthGatewayController } from './auth.controller';
 import { TenantGatewayController } from './tenant.controller';
+import { CatalogGatewayController } from './catalog.controller';
+import { LogsGatewayController } from './logs.controller';
+import { SettingsGatewayController } from './settings.controller';
+import { SuperUserGatewayController } from './super-user.controller';
 import { UserGatewayController } from './user.controller';
 
 @Module({
@@ -44,7 +48,16 @@ import { UserGatewayController } from './user.controller';
       },
     ]),
   ],
-  controllers: [HealthController, AuthGatewayController, TenantGatewayController, UserGatewayController],
+  controllers: [
+    HealthController,
+    AuthGatewayController,
+    TenantGatewayController,
+    CatalogGatewayController,
+    LogsGatewayController,
+    SettingsGatewayController,
+    SuperUserGatewayController,
+    UserGatewayController,
+  ],
   providers: [
     AppLoggerService,
     {

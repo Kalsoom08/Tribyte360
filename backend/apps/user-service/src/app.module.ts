@@ -4,8 +4,16 @@ import { AppConfigModule, AppLoggerService, ConnectionManagerService, I18nServic
 import { UserMessageController } from './user.controller';
 import { TenantAuthMessageController } from './tenant-auth.controller';
 import { CompanyProfileMessageController } from './company-profile.controller';
+import { OrgStructureMessageController } from './org-structure.controller';
+import { TenantUserMgmtMessageController } from './tenant-user-mgmt.controller';
+import { CompanyPolicyMessageController } from './company-policy.controller';
+import { CompanyReportsMessageController } from './company-reports.controller';
 import { TenantAuthService } from './tenant-auth.service';
 import { CompanyProfileService } from './company-profile.service';
+import { OrgStructureService } from './org-structure.service';
+import { TenantUserMgmtService } from './tenant-user-mgmt.service';
+import { CompanyPolicyService } from './company-policy.service';
+import { CompanyReportsService } from './company-reports.service';
 
 @Module({
   imports: [
@@ -15,13 +23,25 @@ import { CompanyProfileService } from './company-profile.service';
       signOptions: { expiresIn: '1d' },
     }),
   ],
-  controllers: [UserMessageController, TenantAuthMessageController, CompanyProfileMessageController],
+  controllers: [
+    UserMessageController,
+    TenantAuthMessageController,
+    CompanyProfileMessageController,
+    OrgStructureMessageController,
+    TenantUserMgmtMessageController,
+    CompanyPolicyMessageController,
+    CompanyReportsMessageController,
+  ],
   providers: [
     AppLoggerService,
     ConnectionManagerService,
     I18nService,
     TenantAuthService,
     CompanyProfileService,
+    OrgStructureService,
+    TenantUserMgmtService,
+    CompanyPolicyService,
+    CompanyReportsService,
   ],
 })
 export class AppModule {}

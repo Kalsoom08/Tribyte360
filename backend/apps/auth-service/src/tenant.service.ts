@@ -1,15 +1,6 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
-import { ConnectionManagerService, TenantSchema, TenantStatus } from '@tribyte/common';
+import { ConnectionManagerService, TenantSchema, TenantStatus, TenantUserSchema } from '@tribyte/common';
 import { hashPassword } from '@tribyte/utils';
-import { Schema } from 'mongoose';
-
-const TenantUserSchema = new Schema({
-  email: { type: String, required: true, unique: true },
-  passwordHash: { type: String, required: true },
-  fullName: { type: String, required: true },
-  role: { type: String, default: 'TENANT_ADMIN' },
-  status: { type: String, default: 'ACTIVE' },
-}, { timestamps: true });
 
 @Injectable()
 export class TenantService {

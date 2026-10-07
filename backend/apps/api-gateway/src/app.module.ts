@@ -12,6 +12,10 @@ import { SettingsGatewayController } from './settings.controller';
 import { SuperUserGatewayController } from './super-user.controller';
 import { CompanyAuthGatewayController } from './company-auth.controller';
 import { CompanyProfileGatewayController } from './company-profile.controller';
+import { OrgStructureGatewayController } from './org-structure.controller';
+import { CompanyUserMgmtGatewayController } from './company-user-mgmt.controller';
+import { CompanyPolicyGatewayController } from './company-policy.controller';
+import { CompanyReportsGatewayController } from './company-reports.controller';
 import { UserGatewayController } from './user.controller';
 
 @Module({
@@ -60,6 +64,10 @@ import { UserGatewayController } from './user.controller';
     SuperUserGatewayController,
     CompanyAuthGatewayController,
     CompanyProfileGatewayController,
+    OrgStructureGatewayController,
+    CompanyUserMgmtGatewayController,
+    CompanyPolicyGatewayController,
+    CompanyReportsGatewayController,
     UserGatewayController,
   ],
   providers: [

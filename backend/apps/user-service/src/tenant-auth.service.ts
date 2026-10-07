@@ -1,16 +1,7 @@
-import { Injectable, UnauthorizedException, ForbiddenException, NotFoundException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, ForbiddenException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ConnectionManagerService, CompanyProfileSchema } from '@tribyte/common';
+import { ConnectionManagerService, TenantUserSchema } from '@tribyte/common';
 import { comparePassword } from '@tribyte/utils';
-import { Schema } from 'mongoose';
-
-const TenantUserSchema = new Schema({
-  email: { type: String, required: true, unique: true },
-  passwordHash: { type: String, required: true },
-  fullName: { type: String, required: true },
-  role: { type: String, default: 'TENANT_ADMIN' },
-  status: { type: String, default: 'ACTIVE' },
-}, { timestamps: true });
 
 @Injectable()
 export class TenantAuthService {

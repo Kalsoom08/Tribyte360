@@ -25,7 +25,7 @@ export enum QueueNames {
 }
 
 export enum MessagePatterns {
-  // Auth & Internal Users
+  // Auth & Internal Users (Super Admin)
   AUTH_VALIDATE_TOKEN = 'auth.validate_token',
   AUTH_LOGIN = 'auth.login',
   SUPER_USER_CREATE = 'super_user.create',
@@ -52,6 +52,11 @@ export enum MessagePatterns {
   LOGS_FIND_ERROR = 'logs.find_error',
   SETTINGS_GET = 'settings.get',
   SETTINGS_UPDATE = 'settings.update',
+
+  // Company Admin Panel (Tenant-scoped)
+  TENANT_AUTH_LOGIN = 'tenant_auth.login',
+  COMPANY_PROFILE_GET = 'company.profile_get',
+  COMPANY_PROFILE_UPDATE = 'company.profile_update',
 
   // Users
   USER_GET_BY_ID = 'user.get_by_id',

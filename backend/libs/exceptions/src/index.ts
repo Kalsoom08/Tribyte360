@@ -45,6 +45,12 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       code = res.error || 'HTTP_EXCEPTION';
       message = typeof res === 'string' ? res : res.message || exception.message;
       details = res.details;
+    } else if (exception && typeof exception === 'object' && (exception.statusCode || exception.status)) {
+      // Handles NestJS Microservice RPC error payloads passed to Gateway
+      status = typeof exception.statusCode === 'number' ? exception.statusCode : HttpStatus.BAD_REQUEST;
+      code = exception.code || exception.error || 'MICROSERVICE_ERROR';
+      message = exception.message || 'Microservice execution error';
+      details = exception.details || exception.response;
     } else if (exception instanceof Error) {
       message = exception.message;
     }
@@ -60,6 +66,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       timestamp: new Date().toISOString(),
     };
 
-    response.status(status).json(payload);
+    response.status(typeof status === 'number' ? status : 500).json(payload);
   }
 }

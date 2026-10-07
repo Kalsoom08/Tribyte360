@@ -59,6 +59,13 @@ export const CurrentUser = createParamDecorator(
   },
 );
 
+export const CurrentTenantUser = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext) => {
+    const request = ctx.switchToHttp().getRequest();
+    return request.tenantUser;
+  },
+);
+
 // Super Admin Auth Guard
 @Injectable()
 export class SuperAuthGuard implements CanActivate {
@@ -85,6 +92,43 @@ export class SuperAuthGuard implements CanActivate {
   }
 }
 
+// Tenant-Scoped User Auth Guard (validates JWT issued for tenant_<slug>)
+@Injectable()
+export class TenantUserAuthGuard implements CanActivate {
+  constructor(private readonly jwtService: JwtService) {}
+
+  canActivate(context: ExecutionContext): boolean {
+    const request = context.switchToHttp().getRequest();
+    const authHeader = request.headers['authorization'];
+    const tenantId = request.headers['x-tenant-id'] as string;
+
+    if (!tenantId) {
+      throw new UnauthorizedException('x-tenant-id header is required');
+    }
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      throw new UnauthorizedException('Missing or invalid Authorization header');
+    }
+
+    const token = authHeader.split(' ')[1];
+    try {
+      const decoded = this.jwtService.verify(token, {
+        secret: process.env.JWT_SECRET || 'dev_secret_key',
+      });
+
+      if (decoded.tenantSlug && decoded.tenantSlug.toLowerCase() !== tenantId.toLowerCase()) {
+        throw new ForbiddenException(`Token was issued for tenant '${decoded.tenantSlug}', not '${tenantId}'`);
+      }
+
+      request.tenantUser = decoded;
+      return true;
+    } catch (err) {
+      if (err instanceof ForbiddenException) throw err;
+      throw new UnauthorizedException('Tenant session token is expired or invalid');
+    }
+  }
+}
+
 // Permissions Guard
 @Injectable()
 export class PermissionsGuard implements CanActivate {
@@ -101,7 +145,7 @@ export class PermissionsGuard implements CanActivate {
     }
 
     const request = context.switchToHttp().getRequest();
-    const user = request.user;
+    const user = request.user || request.tenantUser;
 
     if (!user || !user.permissions) {
       throw new ForbiddenException('User permissions not found');

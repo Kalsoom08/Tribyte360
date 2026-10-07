@@ -10,6 +10,8 @@ import { CatalogGatewayController } from './catalog.controller';
 import { LogsGatewayController } from './logs.controller';
 import { SettingsGatewayController } from './settings.controller';
 import { SuperUserGatewayController } from './super-user.controller';
+import { CompanyAuthGatewayController } from './company-auth.controller';
+import { CompanyProfileGatewayController } from './company-profile.controller';
 import { UserGatewayController } from './user.controller';
 
 @Module({
@@ -56,6 +58,8 @@ import { UserGatewayController } from './user.controller';
     LogsGatewayController,
     SettingsGatewayController,
     SuperUserGatewayController,
+    CompanyAuthGatewayController,
+    CompanyProfileGatewayController,
     UserGatewayController,
   ],
   providers: [

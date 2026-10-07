@@ -7,3 +7,4 @@ export * from './subscription-plan.schema';
 export * from './activity-log.schema';
 export * from './error-log.schema';
 export * from './app-settings.schema';
+export * from './company-profile.schema';

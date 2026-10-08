@@ -16,6 +16,7 @@ import { OrgStructureGatewayController } from './org-structure.controller';
 import { CompanyUserMgmtGatewayController } from './company-user-mgmt.controller';
 import { CompanyPolicyGatewayController } from './company-policy.controller';
 import { CompanyReportsGatewayController } from './company-reports.controller';
+import { HrEmployeeGatewayController } from './hr-employee.controller';
 import { UserGatewayController } from './user.controller';
 
 @Module({
@@ -68,6 +69,7 @@ import { UserGatewayController } from './user.controller';
     CompanyUserMgmtGatewayController,
     CompanyPolicyGatewayController,
     CompanyReportsGatewayController,
+    HrEmployeeGatewayController,
     UserGatewayController,
   ],
   providers: [

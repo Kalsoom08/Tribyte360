@@ -16,3 +16,6 @@ export * from './tenant-role.schema';
 export * from './tenant-user.schema';
 export * from './company-policy.schema';
 export * from './company-audit-settings.schema';
+export * from './employee-document.schema';
+export * from './employment-contract.schema';
+export * from './employee-profile.schema';

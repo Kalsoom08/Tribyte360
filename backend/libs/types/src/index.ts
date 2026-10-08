@@ -53,14 +53,10 @@ export enum MessagePatterns {
   SETTINGS_GET = 'settings.get',
   SETTINGS_UPDATE = 'settings.update',
 
-  // Company Admin Panel (Company Setup & Policies)
+  // Company Admin Panel
   TENANT_AUTH_LOGIN = 'tenant_auth.login',
   COMPANY_PROFILE_GET = 'company.profile_get',
   COMPANY_PROFILE_UPDATE = 'company.profile_update',
-  COMPANY_POLICY_GET = 'company.policy_get',
-  COMPANY_POLICY_UPDATE = 'company.policy_update',
-
-  // Company Admin Panel (Organization Structure)
   DEPARTMENT_CREATE = 'org.department_create',
   DEPARTMENT_FIND_ALL = 'org.department_find_all',
   DESIGNATION_CREATE = 'org.designation_create',
@@ -69,18 +65,23 @@ export enum MessagePatterns {
   BRANCH_FIND_ALL = 'org.branch_find_all',
   COST_CENTER_CREATE = 'org.cost_center_create',
   COST_CENTER_FIND_ALL = 'org.cost_center_find_all',
-
-  // Company Admin Panel (User & Role Management)
   TENANT_ROLE_CREATE = 'company.role_create',
   TENANT_ROLE_FIND_ALL = 'company.role_find_all',
   TENANT_USER_CREATE = 'company.user_create',
   TENANT_USER_FIND_ALL = 'company.user_find_all',
   TENANT_USER_GET_BY_ID = 'company.user_get_by_id',
-
-  // Company Admin Panel (Audit Settings & Executive Dashboard)
+  COMPANY_POLICY_GET = 'company.policy_get',
+  COMPANY_POLICY_UPDATE = 'company.policy_update',
   COMPANY_AUDIT_SETTINGS_GET = 'company.audit_settings_get',
   COMPANY_AUDIT_SETTINGS_UPDATE = 'company.audit_settings_update',
   COMPANY_DASHBOARD_SUMMARY = 'company.dashboard_summary',
+
+  // HR Panel — Employee Management
+  HR_EMPLOYEE_CREATE = 'hr.employee_create',
+  HR_EMPLOYEE_FIND_ALL = 'hr.employee_find_all',
+  HR_EMPLOYEE_GET_BY_ID = 'hr.employee_get_by_id',
+  HR_EMPLOYEE_UPDATE_STATUS = 'hr.employee_update_status',
+  HR_CONTRACT_CREATE = 'hr.contract_create',
 
   // Users
   USER_GET_BY_ID = 'user.get_by_id',

@@ -8,12 +8,14 @@ import { OrgStructureMessageController } from './org-structure.controller';
 import { TenantUserMgmtMessageController } from './tenant-user-mgmt.controller';
 import { CompanyPolicyMessageController } from './company-policy.controller';
 import { CompanyReportsMessageController } from './company-reports.controller';
+import { HrEmployeeMessageController } from './hr-employee.controller';
 import { TenantAuthService } from './tenant-auth.service';
 import { CompanyProfileService } from './company-profile.service';
 import { OrgStructureService } from './org-structure.service';
 import { TenantUserMgmtService } from './tenant-user-mgmt.service';
 import { CompanyPolicyService } from './company-policy.service';
 import { CompanyReportsService } from './company-reports.service';
+import { HrEmployeeService } from './hr-employee.service';
 
 @Module({
   imports: [
@@ -31,6 +33,7 @@ import { CompanyReportsService } from './company-reports.service';
     TenantUserMgmtMessageController,
     CompanyPolicyMessageController,
     CompanyReportsMessageController,
+    HrEmployeeMessageController,
   ],
   providers: [
     AppLoggerService,
@@ -42,6 +45,7 @@ import { CompanyReportsService } from './company-reports.service';
     TenantUserMgmtService,
     CompanyPolicyService,
     CompanyReportsService,
+    HrEmployeeService,
   ],
 })
 export class AppModule {}

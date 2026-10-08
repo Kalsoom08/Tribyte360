@@ -21,6 +21,11 @@ import { HrAttendanceGatewayController } from './hr-attendance.controller';
 import { HrLeaveGatewayController } from './hr-leave.controller';
 import { HrPayrollGatewayController } from './hr-payroll.controller';
 import { HrPerformanceGatewayController } from './hr-performance.controller';
+import { AccGlGatewayController } from './acc-gl.controller';
+import { AccInvoiceGatewayController } from './acc-invoice.controller';
+import { AccPayableGatewayController } from './acc-payable.controller';
+import { AccPayrollPostingGatewayController } from './acc-payroll-posting.controller';
+import { AccReportsGatewayController } from './acc-reports.controller';
 import { UserGatewayController } from './user.controller';
 
 @Module({
@@ -78,6 +83,11 @@ import { UserGatewayController } from './user.controller';
     HrLeaveGatewayController,
     HrPayrollGatewayController,
     HrPerformanceGatewayController,
+    AccGlGatewayController,
+    AccInvoiceGatewayController,
+    AccPayableGatewayController,
+    AccPayrollPostingGatewayController,
+    AccReportsGatewayController,
     UserGatewayController,
   ],
   providers: [

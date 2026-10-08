@@ -76,37 +76,51 @@ export enum MessagePatterns {
   COMPANY_AUDIT_SETTINGS_UPDATE = 'company.audit_settings_update',
   COMPANY_DASHBOARD_SUMMARY = 'company.dashboard_summary',
 
-  // HR Panel — Employee Management
+  // HR Panel
   HR_EMPLOYEE_CREATE = 'hr.employee_create',
   HR_EMPLOYEE_FIND_ALL = 'hr.employee_find_all',
   HR_EMPLOYEE_GET_BY_ID = 'hr.employee_get_by_id',
   HR_EMPLOYEE_UPDATE_STATUS = 'hr.employee_update_status',
-
-  // HR Panel — Shift & Attendance Management
   HR_SHIFT_CREATE = 'hr.shift_create',
   HR_SHIFT_FIND_ALL = 'hr.shift_find_all',
   HR_ATTENDANCE_CLOCK_IN = 'hr.attendance_clock_in',
   HR_ATTENDANCE_CLOCK_OUT = 'hr.attendance_clock_out',
   HR_ATTENDANCE_FIND_ALL = 'hr.attendance_find_all',
-
-  // HR Panel — Leave Management
   HR_LEAVE_TYPE_CREATE = 'hr.leave_type_create',
   HR_LEAVE_TYPE_FIND_ALL = 'hr.leave_type_find_all',
   HR_LEAVE_REQUEST_CREATE = 'hr.leave_request_create',
   HR_LEAVE_REQUEST_FIND_ALL = 'hr.leave_request_find_all',
   HR_LEAVE_REQUEST_UPDATE_STATUS = 'hr.leave_request_update_status',
-
-  // HR Panel — Payroll & Payslip Engine
   HR_SALARY_COMPONENT_CREATE = 'hr.salary_component_create',
   HR_SALARY_COMPONENT_FIND_ALL = 'hr.salary_component_find_all',
   HR_PAYROLL_GENERATE_MONTHLY = 'hr.payroll_generate_monthly',
   HR_PAYROLL_FIND_ALL = 'hr.payroll_find_all',
   HR_PAYROLL_APPROVE = 'hr.payroll_approve',
-
-  // HR Panel — Performance Appraisals & Executive HR Analytics
   HR_APPRAISAL_CREATE = 'hr.appraisal_create',
   HR_APPRAISAL_FIND_ALL = 'hr.appraisal_find_all',
   HR_REPORTS_SUMMARY = 'hr.reports_summary',
+
+  // Accountants Panel — General Ledger & Invoices & Payables
+  ACC_GL_ACCOUNT_CREATE = 'acc.gl_account_create',
+  ACC_GL_ACCOUNT_FIND_ALL = 'acc.gl_account_find_all',
+  ACC_JOURNAL_ENTRY_CREATE = 'acc.journal_entry_create',
+  ACC_JOURNAL_ENTRY_FIND_ALL = 'acc.journal_entry_find_all',
+  ACC_INVOICE_CREATE = 'acc.invoice_create',
+  ACC_INVOICE_FIND_ALL = 'acc.invoice_find_all',
+  ACC_INVOICE_RECORD_PAYMENT = 'acc.invoice_record_payment',
+  ACC_BILL_CREATE = 'acc.bill_create',
+  ACC_BILL_FIND_ALL = 'acc.bill_find_all',
+  ACC_EXPENSE_CLAIM_CREATE = 'acc.expense_claim_create',
+  ACC_EXPENSE_CLAIM_FIND_ALL = 'acc.expense_claim_find_all',
+  ACC_EXPENSE_CLAIM_APPROVE = 'acc.expense_claim_approve',
+  ACC_PAYROLL_POST_JOURNAL = 'acc.payroll_post_journal',
+  ACC_PAYROLL_EXPORT_BANK_FILE = 'acc.payroll_export_bank_file',
+
+  // Accountants Panel — Taxes & Financial Statements
+  ACC_TAX_CREATE = 'acc.tax_create',
+  ACC_TAX_FIND_ALL = 'acc.tax_find_all',
+  ACC_PROFIT_LOSS_REPORT = 'acc.profit_loss_report',
+  ACC_BALANCE_SHEET_REPORT = 'acc.balance_sheet_report',
 
   // Users
   USER_GET_BY_ID = 'user.get_by_id',

@@ -13,6 +13,11 @@ import { HrAttendanceMessageController } from './hr-attendance.controller';
 import { HrLeaveMessageController } from './hr-leave.controller';
 import { HrPayrollMessageController } from './hr-payroll.controller';
 import { HrPerformanceMessageController } from './hr-performance.controller';
+import { AccGlMessageController } from './acc-gl.controller';
+import { AccInvoiceMessageController } from './acc-invoice.controller';
+import { AccPayableMessageController } from './acc-payable.controller';
+import { AccPayrollPostingMessageController } from './acc-payroll-posting.controller';
+import { AccReportsMessageController } from './acc-reports.controller';
 import { TenantAuthService } from './tenant-auth.service';
 import { CompanyProfileService } from './company-profile.service';
 import { OrgStructureService } from './org-structure.service';
@@ -24,6 +29,11 @@ import { HrAttendanceService } from './hr-attendance.service';
 import { HrLeaveService } from './hr-leave.service';
 import { HrPayrollService } from './hr-payroll.service';
 import { HrPerformanceService } from './hr-performance.service';
+import { AccGlService } from './acc-gl.service';
+import { AccInvoiceService } from './acc-invoice.service';
+import { AccPayableService } from './acc-payable.service';
+import { AccPayrollPostingService } from './acc-payroll-posting.service';
+import { AccReportsService } from './acc-reports.service';
 
 @Module({
   imports: [
@@ -46,6 +56,11 @@ import { HrPerformanceService } from './hr-performance.service';
     HrLeaveMessageController,
     HrPayrollMessageController,
     HrPerformanceMessageController,
+    AccGlMessageController,
+    AccInvoiceMessageController,
+    AccPayableMessageController,
+    AccPayrollPostingMessageController,
+    AccReportsMessageController,
   ],
   providers: [
     AppLoggerService,
@@ -62,6 +77,11 @@ import { HrPerformanceService } from './hr-performance.service';
     HrLeaveService,
     HrPayrollService,
     HrPerformanceService,
+    AccGlService,
+    AccInvoiceService,
+    AccPayableService,
+    AccPayrollPostingService,
+    AccReportsService,
   ],
 })
 export class AppModule {}

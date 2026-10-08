@@ -9,6 +9,10 @@ import { TenantUserMgmtMessageController } from './tenant-user-mgmt.controller';
 import { CompanyPolicyMessageController } from './company-policy.controller';
 import { CompanyReportsMessageController } from './company-reports.controller';
 import { HrEmployeeMessageController } from './hr-employee.controller';
+import { HrAttendanceMessageController } from './hr-attendance.controller';
+import { HrLeaveMessageController } from './hr-leave.controller';
+import { HrPayrollMessageController } from './hr-payroll.controller';
+import { HrPerformanceMessageController } from './hr-performance.controller';
 import { TenantAuthService } from './tenant-auth.service';
 import { CompanyProfileService } from './company-profile.service';
 import { OrgStructureService } from './org-structure.service';
@@ -16,6 +20,10 @@ import { TenantUserMgmtService } from './tenant-user-mgmt.service';
 import { CompanyPolicyService } from './company-policy.service';
 import { CompanyReportsService } from './company-reports.service';
 import { HrEmployeeService } from './hr-employee.service';
+import { HrAttendanceService } from './hr-attendance.service';
+import { HrLeaveService } from './hr-leave.service';
+import { HrPayrollService } from './hr-payroll.service';
+import { HrPerformanceService } from './hr-performance.service';
 
 @Module({
   imports: [
@@ -34,6 +42,10 @@ import { HrEmployeeService } from './hr-employee.service';
     CompanyPolicyMessageController,
     CompanyReportsMessageController,
     HrEmployeeMessageController,
+    HrAttendanceMessageController,
+    HrLeaveMessageController,
+    HrPayrollMessageController,
+    HrPerformanceMessageController,
   ],
   providers: [
     AppLoggerService,
@@ -46,6 +58,10 @@ import { HrEmployeeService } from './hr-employee.service';
     CompanyPolicyService,
     CompanyReportsService,
     HrEmployeeService,
+    HrAttendanceService,
+    HrLeaveService,
+    HrPayrollService,
+    HrPerformanceService,
   ],
 })
 export class AppModule {}

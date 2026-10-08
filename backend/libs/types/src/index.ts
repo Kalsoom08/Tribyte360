@@ -81,7 +81,32 @@ export enum MessagePatterns {
   HR_EMPLOYEE_FIND_ALL = 'hr.employee_find_all',
   HR_EMPLOYEE_GET_BY_ID = 'hr.employee_get_by_id',
   HR_EMPLOYEE_UPDATE_STATUS = 'hr.employee_update_status',
-  HR_CONTRACT_CREATE = 'hr.contract_create',
+
+  // HR Panel — Shift & Attendance Management
+  HR_SHIFT_CREATE = 'hr.shift_create',
+  HR_SHIFT_FIND_ALL = 'hr.shift_find_all',
+  HR_ATTENDANCE_CLOCK_IN = 'hr.attendance_clock_in',
+  HR_ATTENDANCE_CLOCK_OUT = 'hr.attendance_clock_out',
+  HR_ATTENDANCE_FIND_ALL = 'hr.attendance_find_all',
+
+  // HR Panel — Leave Management
+  HR_LEAVE_TYPE_CREATE = 'hr.leave_type_create',
+  HR_LEAVE_TYPE_FIND_ALL = 'hr.leave_type_find_all',
+  HR_LEAVE_REQUEST_CREATE = 'hr.leave_request_create',
+  HR_LEAVE_REQUEST_FIND_ALL = 'hr.leave_request_find_all',
+  HR_LEAVE_REQUEST_UPDATE_STATUS = 'hr.leave_request_update_status',
+
+  // HR Panel — Payroll & Payslip Engine
+  HR_SALARY_COMPONENT_CREATE = 'hr.salary_component_create',
+  HR_SALARY_COMPONENT_FIND_ALL = 'hr.salary_component_find_all',
+  HR_PAYROLL_GENERATE_MONTHLY = 'hr.payroll_generate_monthly',
+  HR_PAYROLL_FIND_ALL = 'hr.payroll_find_all',
+  HR_PAYROLL_APPROVE = 'hr.payroll_approve',
+
+  // HR Panel — Performance Appraisals & Executive HR Analytics
+  HR_APPRAISAL_CREATE = 'hr.appraisal_create',
+  HR_APPRAISAL_FIND_ALL = 'hr.appraisal_find_all',
+  HR_REPORTS_SUMMARY = 'hr.reports_summary',
 
   // Users
   USER_GET_BY_ID = 'user.get_by_id',

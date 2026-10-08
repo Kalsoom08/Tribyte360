@@ -17,6 +17,10 @@ import { CompanyUserMgmtGatewayController } from './company-user-mgmt.controller
 import { CompanyPolicyGatewayController } from './company-policy.controller';
 import { CompanyReportsGatewayController } from './company-reports.controller';
 import { HrEmployeeGatewayController } from './hr-employee.controller';
+import { HrAttendanceGatewayController } from './hr-attendance.controller';
+import { HrLeaveGatewayController } from './hr-leave.controller';
+import { HrPayrollGatewayController } from './hr-payroll.controller';
+import { HrPerformanceGatewayController } from './hr-performance.controller';
 import { UserGatewayController } from './user.controller';
 
 @Module({
@@ -70,6 +74,10 @@ import { UserGatewayController } from './user.controller';
     CompanyPolicyGatewayController,
     CompanyReportsGatewayController,
     HrEmployeeGatewayController,
+    HrAttendanceGatewayController,
+    HrLeaveGatewayController,
+    HrPayrollGatewayController,
+    HrPerformanceGatewayController,
     UserGatewayController,
   ],
   providers: [

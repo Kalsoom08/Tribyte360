@@ -1,4 +1,4 @@
-import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
+import { Injectable, ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
 import {
   ConnectionManagerService,
   EmployeeProfileSchema,
@@ -17,7 +17,6 @@ export class HrEmployeeService {
   constructor(private readonly connectionManager: ConnectionManagerService) {}
 
   private async getModels(tenantSlug: string) {
-    // Register all dependent models on tenant connection pool
     await this.connectionManager.getTenantModel(tenantSlug, 'Department', DepartmentSchema);
     await this.connectionManager.getTenantModel(tenantSlug, 'Designation', DesignationSchema);
     await this.connectionManager.getTenantModel(tenantSlug, 'Branch', BranchSchema);
@@ -31,76 +30,91 @@ export class HrEmployeeService {
   }
 
   async createEmployee(tenantSlug: string, data: any) {
-    const { ProfileModel, ContractModel, UserModel } = await this.getModels(tenantSlug);
+    try {
+      const { ProfileModel, ContractModel, UserModel } = await this.getModels(tenantSlug);
 
-    const existingUser = await UserModel.findOne({ email: data.email.toLowerCase() });
-    if (existingUser) {
-      throw new ConflictException(`Employee email '${data.email}' already exists`);
+      const existingUser = await UserModel.findOne({ email: data.email.toLowerCase() });
+      if (existingUser) {
+        throw new ConflictException(`Employee email '${data.email}' already exists`);
+      }
+
+      const count = await ProfileModel.countDocuments();
+      const employeeCode = data.employeeCode || `EMP-${1000 + count + 1}`;
+
+      const existingCode = await ProfileModel.findOne({ employeeCode: employeeCode.toUpperCase() });
+      if (existingCode) {
+        throw new ConflictException(`Employee code '${employeeCode}' already exists`);
+      }
+
+      // 1. Create User
+      const tempPassword = data.password || 'Emp@123456';
+      const hashedPassword = await hashPassword(tempPassword);
+
+      const user = await UserModel.create({
+        email: data.email.toLowerCase(),
+        passwordHash: hashedPassword,
+        fullName: data.fullName,
+        role: data.role || 'EMPLOYEE',
+        departmentId: data.departmentId || null,
+        designationId: data.designationId || null,
+        branchId: data.branchId || null,
+        costCenterId: data.costCenterId || null,
+        phone: data.phone,
+        status: 'ACTIVE',
+      });
+
+      // Map document items cleanly
+      const formattedDocuments = (data.documents || []).map((doc: any) => ({
+        docType: doc.docType || doc.type || 'OTHER',
+        documentNumber: doc.documentNumber || 'N/A',
+        documentUrl: doc.documentUrl,
+        issueDate: doc.issueDate ? new Date(doc.issueDate) : undefined,
+        expiryDate: doc.expiryDate ? new Date(doc.expiryDate) : undefined,
+      }));
+
+      // 2. Create Profile
+      const profile = await ProfileModel.create({
+        userId: user._id,
+        employeeCode: employeeCode.toUpperCase(),
+        dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : undefined,
+        gender: data.gender,
+        maritalStatus: data.maritalStatus,
+        nationality: data.nationality,
+        status: EmploymentStatus.ACTIVE,
+        joiningDate: data.joiningDate ? new Date(data.joiningDate) : new Date(),
+        documents: formattedDocuments,
+        emergencyContactName: data.emergencyContactName,
+        emergencyContactPhone: data.emergencyContactPhone,
+        emergencyContactRelation: data.emergencyContactRelation,
+      });
+
+      // 3. Create Contract
+      const contract = await ContractModel.create({
+        userId: user._id,
+        contractType: data.contractType || 'FULL_TIME',
+        startDate: data.joiningDate ? new Date(data.joiningDate) : new Date(),
+        probationDays: data.probationDays || 90,
+        noticePeriodDays: data.noticePeriodDays || 30,
+        baseSalary: data.baseSalary || 0,
+        currency: data.currency || 'USD',
+        isActive: true,
+      });
+
+      return {
+        user,
+        profile,
+        contract,
+        initialCredentials: {
+          email: user.email,
+          temporaryPassword: tempPassword,
+          subdomainUrl: `https://${tenantSlug}.tribyte360.com`,
+        },
+      };
+    } catch (err: any) {
+      console.error('HrEmployeeService.createEmployee Error:', err);
+      if (err instanceof ConflictException || err instanceof NotFoundException) throw err;
+      throw new BadRequestException(err.message || 'Failed to create employee profile');
     }
-
-    const count = await ProfileModel.countDocuments();
-    const employeeCode = data.employeeCode || `EMP-${1000 + count + 1}`;
-
-    const existingCode = await ProfileModel.findOne({ employeeCode: employeeCode.toUpperCase() });
-    if (existingCode) {
-      throw new ConflictException(`Employee code '${employeeCode}' already exists`);
-    }
-
-    // 1. Create User
-    const tempPassword = data.password || 'Emp@123456';
-    const hashedPassword = await hashPassword(tempPassword);
-
-    const user = await UserModel.create({
-      email: data.email.toLowerCase(),
-      passwordHash: hashedPassword,
-      fullName: data.fullName,
-      role: data.role || 'EMPLOYEE',
-      departmentId: data.departmentId || null,
-      designationId: data.designationId || null,
-      branchId: data.branchId || null,
-      costCenterId: data.costCenterId || null,
-      phone: data.phone,
-      status: 'ACTIVE',
-    });
-
-    // 2. Create Profile
-    const profile = await ProfileModel.create({
-      userId: user._id,
-      employeeCode: employeeCode.toUpperCase(),
-      dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : undefined,
-      gender: data.gender,
-      maritalStatus: data.maritalStatus,
-      nationality: data.nationality,
-      status: EmploymentStatus.ACTIVE,
-      joiningDate: data.joiningDate ? new Date(data.joiningDate) : new Date(),
-      documents: data.documents || [],
-      emergencyContactName: data.emergencyContactName,
-      emergencyContactPhone: data.emergencyContactPhone,
-      emergencyContactRelation: data.emergencyContactRelation,
-    });
-
-    // 3. Create Contract
-    const contract = await ContractModel.create({
-      userId: user._id,
-      contractType: data.contractType || 'FULL_TIME',
-      startDate: data.joiningDate ? new Date(data.joiningDate) : new Date(),
-      probationDays: data.probationDays || 90,
-      noticePeriodDays: data.noticePeriodDays || 30,
-      baseSalary: data.baseSalary || 0,
-      currency: data.currency || 'USD',
-      isActive: true,
-    });
-
-    return {
-      user,
-      profile,
-      contract,
-      initialCredentials: {
-        email: user.email,
-        temporaryPassword: tempPassword,
-        subdomainUrl: `https://${tenantSlug}.tribyte360.com`,
-      },
-    };
   }
 
   async findAllEmployees(tenantSlug: string) {

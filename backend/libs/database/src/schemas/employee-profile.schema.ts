@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { EmployeeDocumentItem, EmployeeDocumentItemSchema } from './employee-document.schema';
+import { EmployeeDocumentItemSchema, EmployeeDocumentItem } from './employee-document.schema';
 
 export type EmployeeProfileDocument = EmployeeProfile & Document;
 
@@ -17,7 +17,7 @@ export class EmployeeProfile {
   userId: string;
 
   @Prop({ required: true, unique: true, uppercase: true, trim: true })
-  employeeCode: string; // e.g., "EMP-1001"
+  employeeCode: string;
 
   @Prop() dateOfBirth?: Date;
   @Prop() gender?: string;
@@ -30,11 +30,8 @@ export class EmployeeProfile {
   @Prop({ required: true, default: Date.now })
   joiningDate: Date;
 
-  @Prop()
-  exitDate?: Date;
-
-  @Prop()
-  exitReason?: string;
+  @Prop() exitDate?: Date;
+  @Prop() exitReason?: string;
 
   @Prop({ type: [EmployeeDocumentItemSchema], default: [] })
   documents: EmployeeDocumentItem[];
